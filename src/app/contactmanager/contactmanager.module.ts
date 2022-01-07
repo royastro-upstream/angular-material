@@ -13,6 +13,7 @@ import { UserService } from './services/user.service';
 import { HttpClientModule } from '@angular/common/http';
 import { NotesComponent } from './components/notes/notes.component';
 import { NewContactDialogComponent } from './components/new-contact-dialog/new-contact-dialog.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 const routes: Routes = [
@@ -36,6 +37,8 @@ const routes: Routes = [
     NewContactDialogComponent
   ],
   imports: [
+    FormsModule,
+    ReactiveFormsModule,
     CommonModule,
     HttpClientModule,
     MaterialModule,
