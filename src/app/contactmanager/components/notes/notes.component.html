@@ -1,4 +1,9 @@
 <div class="mat-elevation-z8">
+  <mat-form-field appearance="standard">
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #notesFilterInput>
+  </mat-form-field>
+
     <table mat-table [dataSource]="dataSource">
   
       <ng-container matColumnDef="position">
