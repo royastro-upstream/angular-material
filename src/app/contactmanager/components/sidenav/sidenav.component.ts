@@ -16,8 +16,8 @@ const SMALL_WIDTH_BREAKPOINT = 720;
 export class SidenavComponent implements OnInit {
 
   public isScreenSmall!: boolean;
-
-  users: Observable<User[]>;
+  users: Observable<User[]>;  
+  direction: 'ltr' | 'rtl' = 'ltr';
 
   constructor(private breakpointObserver: BreakpointObserver,
     private userService: UserService,
@@ -41,4 +41,8 @@ export class SidenavComponent implements OnInit {
         }
       });
   }  
+
+  toggleDirection() {
+    this.direction = this.direction === 'ltr' ? 'rtl' : 'ltr';    
+  }
 }

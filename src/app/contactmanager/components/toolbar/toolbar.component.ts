@@ -12,6 +12,7 @@ import { NewContactDialogComponent } from '../new-contact-dialog/new-contact-dia
 })
 export class ToolbarComponent implements OnInit {
   @Output() toggleSidenav = new EventEmitter<void>();
+  @Output() toggleDirection = new EventEmitter<void>();  
 
   constructor(private dialog: MatDialog, private snackBar: MatSnackBar, private router: Router) { }
 
@@ -39,8 +40,10 @@ export class ToolbarComponent implements OnInit {
     return this.snackBar.open(message, action, {
       duration: 5000
     });
+  }
 
-
+  changeDirection() {
+    this.toggleDirection.emit();
   }
 }
 
