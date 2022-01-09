@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start-local": "ng serve --configuration local",
     "json-server": "npx json-server --config ./src/json-server/json-server.json --watch ./src/json-server/db.json --routes ./src/json-server/routes.json",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",

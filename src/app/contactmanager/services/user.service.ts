@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../models/user';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -28,8 +29,7 @@ export class UserService {
   }
 
   loadAll() {
-    //const usersUrl = 'https://angular-material-api.azurewebsites.net/users'
-    const usersUrl = 'http://localhost:3001/users'
+    const usersUrl = environment.usersApiUrl;
 
     return this.http.get<User[]>(usersUrl)
       .subscribe(data => {
