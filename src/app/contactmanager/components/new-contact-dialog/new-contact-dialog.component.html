@@ -1,29 +1,31 @@
 <h2 mat-dialog-title>Add new contact</h2>
 
 <mat-dialog-content>
-    <div class="example-container">
+    <div class="example-container" [formGroup]="contactManagerForm">
         <mat-form-field appearance="fill">
             <mat-label>Avatar</mat-label>
-            <mat-select [(ngModel)]="user.avatar">
+            <mat-select formControlName="avatar">
                 <mat-select-trigger>
-                    <mat-icon svgIcon="{{user.avatar}}"></mat-icon>{{user.avatar}}
+                    <mat-icon [svgIcon]="contactManagerForm.controls.avatar.value"></mat-icon>
+                    {{contactManagerForm.controls.avatar.value}}
                 </mat-select-trigger>
                 <mat-option *ngFor="let avatar of avatars" [value]="avatar">
                     <mat-icon svgIcon="{{avatar}}"></mat-icon>{{avatar}}
                 </mat-option>
             </mat-select>
+            <mat-error *ngIf="contactManagerForm.controls.avatar.invalid">Required</mat-error>
         </mat-form-field>
         <br />
         <mat-form-field appearance="fill">
             <mat-label>Name</mat-label>
-            <input matInput [formControl]="name" required>
-            <mat-error *ngIf="name.invalid">{{getErrorMessage()}}</mat-error>
+            <input matInput formControlName="name" required>
+            <mat-error *ngIf="contactManagerForm.controls.name.invalid">{{getErrorMessage()}}</mat-error>
         </mat-form-field>
         <br />
 
         <mat-form-field appearance="fill">
             <mat-label>Birthday</mat-label>
-            <input matInput [matDatepicker]="picker" [(ngModel)]="user.birthDate">
+            <input matInput [matDatepicker]="picker" formControlName="birthDate">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
@@ -32,7 +34,7 @@
 
         <mat-form-field appearance="fill">
             <mat-label>Bio</mat-label>
-            <textarea matInput [(ngModel)]="user.bio"></textarea>
+            <textarea matInput formControlName="bio"></textarea>
         </mat-form-field>
     </div>
 </mat-dialog-content>

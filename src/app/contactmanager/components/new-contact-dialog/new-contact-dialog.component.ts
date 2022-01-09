@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { User } from '../../models/user';
 import { UserService } from '../../services/user.service';
@@ -13,14 +13,25 @@ export class NewContactDialogComponent implements OnInit {
 
   avatars = ['svg-1', 'svg-2', 'svg-3', 'svg-4'];
   user: User;
+  contactManagerForm!: FormGroup;
 
-  constructor(private dialogRef: MatDialogRef<NewContactDialogComponent>,
-    private userService: UserService) { }
+  constructor(
+    private dialogRef: MatDialogRef<NewContactDialogComponent>,
+    private userService: UserService,
+    private formBuilder: FormBuilder) { }
 
   name = new FormControl('', [Validators.required])
   
   ngOnInit(): void {
-    this.user = new User();
+    this.user = new User();    
+
+    this.contactManagerForm = this.formBuilder.group({
+      avatar: ['', Validators.required],
+      name: ['', Validators.required],
+      birthDate: ['', Validators.required],
+      bio: ['', Validators.required]
+    })
+
   }
 
   getErrorMessage() {
@@ -29,7 +40,10 @@ export class NewContactDialogComponent implements OnInit {
 
   save() {
     // todo: perform validation, use reactiveformsmodule
-    this.user.name = this.name.value;
+    this.user.name = this.contactManagerForm.controls.name.value;
+    this.user.avatar = this.contactManagerForm.controls.avatar.value;    
+    this.user.birthDate = this.contactManagerForm.controls.birthDate.value;
+    this.user.bio = this.contactManagerForm.controls.bio.value;
 
     this.userService.addUser(this.user).then(user=> {
       this.dialogRef.close(user);
